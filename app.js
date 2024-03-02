@@ -23,6 +23,8 @@ const start = async () => {
     })
 
     app.post("/api/check", async (req, res, next) => {
+        const {body} = req
+        
         try {
             await db.getData("/cards/" + body.text+body.name)
 
