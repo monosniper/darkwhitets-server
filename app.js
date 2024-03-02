@@ -24,11 +24,11 @@ const start = async () => {
 
     app.post("/api/check", async (req, res, next) => {
         try {
-            await db.getData("/cards/" + body.text)
+            await db.getData("/cards/" + body.text+body.name)
 
             return res.json({success: true, data: false})
         } catch(error) {
-            await db.push("/cards/" + body.text, true)
+            await db.push("/cards/" + body.text+body.name, true)
 
             return res.json({success: true, data: true})
         }
