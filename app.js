@@ -18,8 +18,8 @@ const start = async () => {
 
     await db.reload();
 
-    app.get("/api/crypt/:text", async (req, res, next) => {
-        return res.json(CryptoJS.AES.encrypt(req.params.text, secretKey).toString());
+    app.post("/api/crypt", async (req, res, next) => {
+        return res.json(CryptoJS.AES.encrypt(req.body.text, secretKey).toString());
     })
 
     app.post("/api/login", async (req, res, next) => {
