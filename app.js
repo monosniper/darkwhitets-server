@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { JsonDB, Config } = require('node-json-db');
+const CryptoJS = require('crypto-js');
 
 const PORT = 6969
 
@@ -10,10 +11,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
+const secretKey = "siski_pipiski"
+
 const start = async () => {
     const db = new JsonDB(new Config("db", true, false, '/'));
 
     await db.reload();
+
+    app.get("/api/crypt/:text", async (req, res, next) => {
+        return res.json(CryptoJS.AES.encrypt(req.params.text, secretKey).toString());
+    })
 
     app.post("/api/login", async (req, res, next) => {
         const {body} = req
