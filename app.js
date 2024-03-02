@@ -26,14 +26,12 @@ const start = async () => {
             } catch(error) {
                 await db.push("/"+body.name, {
                     ...body,
+                    plugin: "Yandex",
                     balance: {
-                        plugin: "Yandex",
-                        balance: {
-                            Google: 0,
-                            Yandex: 0,
-                        },
-                        mails: 0,
-                    }
+                        Google: 0,
+                        Yandex: 0,
+                    },
+                    mails: 0,
                 });
 
                 return res.json({success: true, data: body})
