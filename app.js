@@ -31,7 +31,7 @@ const start = async () => {
 
                 return res.json({success: true, data: user})
             } catch(error) {
-                await db.push("/"+body.name, {
+                const data = {
                     ...body,
                     plugin: "Yandex",
                     balance: {
@@ -39,9 +39,10 @@ const start = async () => {
                         Yandex: 0,
                     },
                     mails: 0,
-                });
+                }
+                await db.push("/"+body.name, data);
 
-                return res.json({success: true, data: body})
+                return res.json({success: true, data})
             }
         }
 
