@@ -24,7 +24,17 @@ const start = async () => {
 
                 return res.json({success: true, data: user})
             } catch(error) {
-                await db.push("/"+body.name, body);
+                await db.push("/"+body.name, {
+                    ...body,
+                    balance: {
+                        plugin: "Yandex",
+                        balance: {
+                            Google: 0,
+                            Yandex: 0,
+                        },
+                        mails: 0,
+                    }
+                });
 
                 return res.json({success: true, data: body})
             }
