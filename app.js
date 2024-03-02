@@ -22,6 +22,18 @@ const start = async () => {
         return res.json(CryptoJS.AES.encrypt(req.body.text, secretKey).toString());
     })
 
+    app.post("/api/check", async (req, res, next) => {
+        try {
+            await db.getData("/cards/" + body.text)
+
+            return res.json({success: true, data: false})
+        } catch(error) {
+            await db.push("/cards/" + body.text, true)
+
+            return res.json({success: true, data: true})
+        }
+    })
+
     app.post("/api/login", async (req, res, next) => {
         const {body} = req
 
